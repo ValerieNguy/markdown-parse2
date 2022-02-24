@@ -55,6 +55,42 @@ public class MarkdownParseTest {
         assertLinks(List.of("last line link should be found"), "testCases/lastLine.md");
     }
 
+    @Test
+    public void testBackticks() {
+        String fileName = "snippet1.md";
+        List<String> expected = List.of("`google.com", "google.com", "ucsd.edu");
+
+        try {
+            assertEquals(expected, MarkdownParse.getLinks(Files.readString(Path.of(fileName))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testNested() {
+        String fileName = "snippet2.md";
+        List<String> expected = List.of("a.com", "a.com(())", "example.com");
+
+        try {
+            assertEquals(expected, MarkdownParse.getLinks(Files.readString(Path.of(fileName))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLongText() {
+        String fileName = "snippet3.md";
+        List<String> expected = List.of("https://ucsd-cse15l-w22.github.io/");
+
+        try {
+            assertEquals(expected, MarkdownParse.getLinks(Files.readString(Path.of(fileName))));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void assertLinks(List<String> expectedLinks, String fileName) throws IOException {
         Path filePath = Path.of(fileName);
         String contents = Files.readString(filePath);
