@@ -53,8 +53,9 @@ public class MarkdownParseTest {
     @Test
     public void testLastLine() throws IOException {
         assertLinks(List.of("last line link should be found"), "testCases/lastLine.md");
-    }
+    } 
 
+    /*
     @Test
     public void testBackticks() {
         String fileName = "snippet1.md";
@@ -90,6 +91,7 @@ public class MarkdownParseTest {
             e.printStackTrace();
         }
     }
+    */
 
     public static void assertLinks(List<String> expectedLinks, String fileName) throws IOException {
         Path filePath = Path.of(fileName);
